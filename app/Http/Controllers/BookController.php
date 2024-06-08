@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Http\Requests\BookRequest;
+use Illuminate\Support\Facades\Log;
 
 
 class BookController extends Controller
@@ -17,7 +18,9 @@ class BookController extends Controller
 
 	public function edit($id)
 	{
+		Log::debug('start: edit');
 		$book = Book::findOrFail($id);
+//		$book = (Book::where('books.id', $id)->get())[0];
 		return view('book/edit', compact('book'));
 	}
 
