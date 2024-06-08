@@ -21,7 +21,7 @@ class BookController extends Controller
 		return view('book/edit', compact('book'));
 	}
 
-	public function update(Request $request, $id)
+	public function update(BookRequest $request, $id)
 	{
 		$book = Book::findOrFail($id);
 		$book->name = $request->name;
