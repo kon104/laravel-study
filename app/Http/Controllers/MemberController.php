@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Book;
+use App\Models\Member;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Log;
 use Auth;
 
 
-class BookController extends Controller
+class MemberController extends Controller
 {
 
 	public function __construct() {      //  added '__construct'
@@ -27,17 +27,17 @@ class BookController extends Controller
 
 	public function index()
 	{
-		$books = Book::all();
-		return view('book/index', compact('books'));
+		$members = Member::all();
+		return view('member/index', compact('members'));
 	}
 
 	public function edit($id)
 	{
 		$view = $this->unauthView();
 		if (is_null($view)) {
-			$book = Book::findOrFail($id);
+			$member = Member::findOrFail($id);
 //			$book = (Book::where('books.id', $id)->get())[0];
-			$view = view('book/edit', compact('book'));
+			$view = view('member/edit', compact('member'));
 		}
 		return $view;
 	}
@@ -72,8 +72,8 @@ class BookController extends Controller
 		$view = $this->unauthView();
 		if (is_null($view)) {
 			// return an empty $book.
-			$book = new Book();
-			$view = view('book/create', compact('book'));
+			$member = new Member();
+			$view = view('member/create', compact('member'));
 		}
 		return $view;
 	}

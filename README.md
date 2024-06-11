@@ -1,5 +1,5 @@
 
-## Laravel-study
+# Laravel-study
 
 ## Gitからcloneで再開する
 
@@ -36,6 +36,22 @@ $ # vim database/seeders/BooksTableSeeder.php
 $ # vim database/seeders/DatabaseSeeder.php
 $ php artisan db:seed
 ```
+
+## (調査中) 認証関係
+
+- Jetstream
+```
+$ brew install npm
+$ composer require laravel/jetstream
+$ php artisan jetstream:install livewire --teams
+```
+
+- Breeze
+```
+$ brew install npm
+composer require laravel/breeze 
+```
+-- 「routes/web.php」が全て書き換わってしまっているので独自で追加した「Route」を追記する
 
 ## 参考資料
 
