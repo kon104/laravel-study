@@ -23,16 +23,17 @@ require __DIR__.'/auth.php';
 Route::get('hello', 'App\Http\Controllers\HelloController@index');
 Route::get('unauth', 'App\Http\Controllers\UnAuthController@index');
 
-Route::get('book', 'App\Http\Controllers\BookController@index');
-Route::get('book/{book}/edit', 'App\Http\Controllers\BookController@edit');
-Route::get('book/create', 'App\Http\Controllers\BookController@create');
-Route::put('book/{book}', 'App\Http\Controllers\BookController@update');
-Route::delete('book/{book}', 'App\Http\Controllers\BookController@destroy');
-Route::post('book', 'App\Http\Controllers\BookController@store');
+Route::get('book', 'App\Http\Controllers\BookController@index')->middleware('auth');
+Route::get('book/{book}/edit', 'App\Http\Controllers\BookController@edit')->middleware('auth');
+Route::get('book/create', 'App\Http\Controllers\BookController@create')->middleware('auth');
+Route::put('book/{book}', 'App\Http\Controllers\BookController@update')->middleware('auth');
+Route::delete('book/{book}', 'App\Http\Controllers\BookController@destroy')->middleware('auth');
+Route::post('book', 'App\Http\Controllers\BookController@store')->middleware('auth');
 
-Route::get('member', 'App\Http\Controllers\MemberController@index');
-Route::get('member/{member}/edit', 'App\Http\Controllers\MemberController@edit');
-Route::get('member/create', 'App\Http\Controllers\MemberController@create');
+Route::get('member', 'App\Http\Controllers\MemberController@index')->middleware('auth');
+Route::get('member/{member}/edit', 'App\Http\Controllers\MemberController@edit')->middleware('auth');
+Route::get('member/create', 'App\Http\Controllers\MemberController@create')->middleware('auth');
+Route::post('member', 'App\Http\Controllers\MemberController@store')->middleware('auth');
 
 
 

@@ -13,16 +13,6 @@ class MemberController extends Controller
 {
 
 	public function __construct() {      //  added '__construct'
-//		$this->middleware('auth')->except(['index', 'show']);
-//		$this->middleware('auth')->except(['index']);
-	}
-
-	private function unauthView() {
-		$view = null;
-		if (Auth::check() !== true) {
-			$view = redirect("/unauth");
-		}
-		return $view;
 	}
 
 	public function index()
@@ -33,71 +23,49 @@ class MemberController extends Controller
 
 	public function edit($id)
 	{
-		$view = $this->unauthView();
-		if (is_null($view)) {
-			$member = Member::findOrFail($id);
-//			$book = (Book::where('books.id', $id)->get())[0];
-			$view = view('member/edit', compact('member'));
-		}
-		return $view;
+		$member = Member::findOrFail($id);
+//		$book = (Book::where('books.id', $id)->get())[0];
+		return view('member/edit', compact('member'));
 	}
 
 	public function update(BookRequest $request, $id)
 	{
-		$view = $this->unauthView();
-		if (is_null($view)) {
-			$book = Book::findOrFail($id);
-			$book->name = $request->name;
-			$book->price = $request->price;
-			$book->author = $request->author;
-			$book->save();
-			$view = redirect("/book");
-		}
-		return $view;
+		$book = Book::findOrFail($id);
+		$book->name = $request->name;
+		$book->price = $request->price;
+		$book->author = $request->author;
+		$book->save();
+		return redirect("/book");
 	}
 
 	public function destroy($id)
 	{
-		$view = $this->unauthView();
-		if (is_null($view)) {
-			$book = Book::findOrFail($id);
-			$book->delete();
-			$view = redirect("/book");
-		}
-		return $view;
+		$book = Book::findOrFail($id);
+		$book->delete();
+		return redirect("/book");
 	}
 
 	public function create()
 	{
-		$view = $this->unauthView();
-		if (is_null($view)) {
-			// return an empty $book.
-			$member = new Member();
-			$view = view('member/create', compact('member'));
-		}
-		return $view;
+		// return an empty $book.
+		$member = new Member();
+		return view('member/create', compact('member'));
 	}
 
 	public function store(BookRequest $request)
 	{
-		$view = $this->unauthView();
-		if (is_null($view)) {
 /*
-			$validated = $request->validate([
-				'name' => ['required', 'string', 'max:50'],
-				'price' => ['required', 'integer'],
-			]);
+		$validated = $request->validate([
+			'name' => ['required', 'string', 'max:50'],
+			'price' => ['required', 'integer'],
+		]);
 */
-			$book = new Book();
-			$book->name = $request->name;
-			$book->price = $request->price;
-			$book->author = $request->author;
-			$book->save();
-			$view = redirect("/book");
-		}
-		return $view;
+		$book = new Book();
+		$book->name = $request->name;
+		$book->price = $request->price;
+		$book->author = $request->author;
+		$book->save();
+		return redirect("/book");
 	}
-
-
 
 }
